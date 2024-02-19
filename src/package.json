@@ -91,6 +91,6 @@
     "start" : "node ./bin/www.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "wpcho",
   "license": "ISC"
 }
