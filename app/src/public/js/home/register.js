@@ -2,22 +2,23 @@
 //  DOM ==> document Object Models
 
 const id = document.querySelector('#id');
+const name = document.querySelector('#name');
 const psword = document.querySelector('#psword');
-const loginBtn = document.querySelector('#button');
+const confirmPsword = document.querySelector('#confirm-psword');
+const registerBtn = document.querySelector('#button');
 
-console.log(id.outerHTML);
-console.log(psword.outerHTML);
-console.log(loginBtn.outerHTML);
 
-loginBtn.addEventListener('click',login);
+registerBtn.addEventListener('click',register);
 
-function login () {
+function register () {
     const req = {
         id : id.value,
+        name : name.value,
         psword : psword.value,
+        confirmPsword : confirmPsword.value
     };
-    // console.log(req)
-    fetch('/login', {
+    console.log("req :",req)
+    fetch('/register', {
         method: 'POST',
         headers : {
             'Content-Type' : 'application/json',
@@ -27,12 +28,12 @@ function login () {
     .then( (res) => res.json())
     .then( (res) => {
         if (res.success) {
-            location.href = "/";
+            location.href = "/login";
         } else {
             alert(res.msg);
         }
     })
     .catch( (err) => {
-        console.error( "로그인 중 에러 발생");
+        console.error( "회원가입 에러 발생");
     });
 };
