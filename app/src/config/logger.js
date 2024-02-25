@@ -4,6 +4,7 @@ const { combine, timestamp, printf, label, simple, colorize} = format;
 const printFormat = printf(({timestamp,label ,level,message}) =>{
     return `${timestamp} [${label}] ${level} : ${message}`
 })
+
 const printLogFormat = {
     file : combine(
         label({
@@ -20,6 +21,7 @@ const printLogFormat = {
         simple(),
         ),
 }
+
 combine(
     label({
         label: "백앤드 맛보기",
@@ -30,6 +32,7 @@ combine(
     }),
     printFormat,
     )
+
 const opts = {
     file : new transports.File({
         filename: "access.log",
@@ -49,4 +52,8 @@ transports: [opts.file],
 if (process.env.NODE_ENV !== "production"){
     logger.add(opts.console);
 }
+
+logger.stream = {
+    write: (message ) => logger.info(message),
+};
 module.exports = logger;
